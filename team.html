@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PureGradient | Research Technology Innovation</title>
+    <title>Team | PureGradient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,7 +39,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -91,7 +90,6 @@
             color: var(--accent);
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             background: none;
             border: 1px solid var(--border);
@@ -109,7 +107,6 @@
             color: var(--accent);
         }
 
-        /* Hero Section */
         .hero {
             margin-top: 80px;
             padding: 6rem 2rem 4rem;
@@ -119,75 +116,77 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
+            margin-bottom: 3rem;
             letter-spacing: -0.03em;
         }
 
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* Blog Section */
-        .blog-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--secondary);
-            margin-bottom: 2rem;
-        }
-
-        .blog-grid {
+        .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
             margin-bottom: 4rem;
         }
 
-        .blog-card {
+        .team-member {
             border: 1px solid var(--border);
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.2s, transform 0.2s;
+            padding: 2rem;
         }
 
-        .blog-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
+        .team-member h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .blog-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .blog-card p {
-            color: var(--secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .blog-meta {
+        .team-role {
             font-family: 'DM Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--secondary);
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        /* Footer */
+        .team-bio {
+            color: var(--secondary);
+            line-height: 1.7;
+        }
+
+        .collaboration-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .collaboration-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .collaboration-section p {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .collaboration-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .collaboration-list li {
+            padding: 0.75rem 0;
+            color: var(--secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .collaboration-list li:last-child {
+            border-bottom: none;
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -217,17 +216,12 @@
             color: var(--accent);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
 
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .blog-grid {
+            .team-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -254,31 +248,32 @@
     </nav>
 
     <section class="hero">
-        <h1>Research Technology<br>Innovation</h1>
-        <p class="tagline">Advancing precision medicine and computational biology through cutting-edge research and open-source tools.</p>
+        <h1>Meet the team</h1>
+
+        <div class="team-grid">
+            <div class="team-member">
+                <h2>Karen Lawson</h2>
+                <div class="team-role">Managing Director</div>
+                <p class="team-bio">Established technology and product professional with a proven track record of crafting innovative global designs. Expert in leveraging data and architecture to drive product excellence and deliver impactful solutions across diverse markets. Passionate about fostering collaborative relationships to drive continuous innovation and meet evolving market demands.</p>
+            </div>
+
+            <div class="team-member">
+                <h2>Samantha Lawson</h2>
+                <div class="team-role">Director of Product Development</div>
+                <p class="team-bio">Experienced bioinformatics engineer with a strong background in high-performance computing, specializing in complex genomic data analysis and algorithm development. Seeking collaborative opportunities to harness cutting-edge computational tools and expertise in solving intricate biological and big data challenges.</p>
+            </div>
+        </div>
     </section>
 
-    <section id="blog" class="blog-section">
-        <div class="section-title">Latest from the founders</div>
-        <div class="blog-grid">
-            <a href="/blog/doha-trip.html" class="blog-card">
-                <h3>PG team heads to Doha</h3>
-                <p>The team visited Qatar for the 11th PMFG Summit, discussing precision medicine and genomics with leading experts.</p>
-                <div class="blog-meta">Samantha Lawson · Dec 10, 2025</div>
-            </a>
-
-            <a href="/blog/mcp-evolution.html" class="blog-card">
-                <h3>The Glorious Evolution of MCP: From Evil AI to Helpful Metadata</h3>
-                <p>Three humble letters packed with more drama and evolution than you might expect.</p>
-                <div class="blog-meta">Karen Lawson · Aug 14, 2025</div>
-            </a>
-
-            <a href="/blog/blas-r-optimization.html" class="blog-card">
-                <h3>Speed Up R Code with BLAS 🔧</h3>
-                <p>Leverage BLAS and vectorized R code to achieve massive performance gains in your numerical workflows.</p>
-                <div class="blog-meta">Samantha Lawson · Jun 14, 2025</div>
-            </a>
-        </div>
+    <section class="collaboration-section">
+        <h2>Collaborating with you</h2>
+        <p>We provide a range of methods in which to work together to get your project moving forward:</p>
+        <ul class="collaboration-list">
+            <li>Short term, hourly consulting</li>
+            <li>Outcome-based or fixed deliverable</li>
+            <li>Open-ended continuous contract</li>
+        </ul>
+        <p>Please reach out for a quick discussion to determine what is best for your innovation needs.</p>
     </section>
 
     <footer>
@@ -294,14 +289,10 @@
     </footer>
 
     <script>
-        // Auto-update copyright year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
-
-        // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', currentTheme);
 

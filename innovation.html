@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PureGradient | Research Technology Innovation</title>
+    <title>Innovation | PureGradient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,7 +39,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -91,7 +90,6 @@
             color: var(--accent);
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             background: none;
             border: 1px solid var(--border);
@@ -109,7 +107,6 @@
             color: var(--accent);
         }
 
-        /* Hero Section */
         .hero {
             margin-top: 80px;
             padding: 6rem 2rem 4rem;
@@ -119,75 +116,52 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
         }
 
-        .tagline {
-            font-size: 1.25rem;
+        .intro {
+            font-size: 1.15rem;
             color: var(--secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
-        }
-
-        /* Blog Section */
-        .blog-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--secondary);
-            margin-bottom: 2rem;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .blog-card {
-            border: 1px solid var(--border);
-            padding: 1.5rem;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.2s, transform 0.2s;
-        }
-
-        .blog-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .blog-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-        }
-
-        .blog-card p {
-            color: var(--secondary);
-            font-size: 0.95rem;
+            max-width: 700px;
             margin-bottom: 1rem;
         }
 
-        .blog-meta {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--secondary);
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+            max-width: 1200px;
+            padding: 0 2rem;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Footer */
+        .service-card {
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: border-color 0.2s;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+        }
+
+        .service-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -217,17 +191,12 @@
             color: var(--accent);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
 
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .blog-grid {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -254,32 +223,35 @@
     </nav>
 
     <section class="hero">
-        <h1>Research Technology<br>Innovation</h1>
-        <p class="tagline">Advancing precision medicine and computational biology through cutting-edge research and open-source tools.</p>
+        <h1>Innovation consulting</h1>
+        <p class="intro">A simple scientific consulting firm dedicated to innovation, design, and technology challenges.</p>
+        <p class="intro">Focused on creating value and helping clients take concepts to their desired endpoint — concept, design, proof to market.</p>
     </section>
 
-    <section id="blog" class="blog-section">
-        <div class="section-title">Latest from the founders</div>
-        <div class="blog-grid">
-            <a href="/blog/doha-trip.html" class="blog-card">
-                <h3>PG team heads to Doha</h3>
-                <p>The team visited Qatar for the 11th PMFG Summit, discussing precision medicine and genomics with leading experts.</p>
-                <div class="blog-meta">Samantha Lawson · Dec 10, 2025</div>
-            </a>
-
-            <a href="/blog/mcp-evolution.html" class="blog-card">
-                <h3>The Glorious Evolution of MCP: From Evil AI to Helpful Metadata</h3>
-                <p>Three humble letters packed with more drama and evolution than you might expect.</p>
-                <div class="blog-meta">Karen Lawson · Aug 14, 2025</div>
-            </a>
-
-            <a href="/blog/blas-r-optimization.html" class="blog-card">
-                <h3>Speed Up R Code with BLAS 🔧</h3>
-                <p>Leverage BLAS and vectorized R code to achieve massive performance gains in your numerical workflows.</p>
-                <div class="blog-meta">Samantha Lawson · Jun 14, 2025</div>
-            </a>
+    <div class="services-grid">
+        <div class="service-card">
+            <h2>Solution design & visualization</h2>
+            <p>Focus on design and architecture first. Take the problem apart, challenge common thinking and then iterate on solutions that deliver the results across disciplines, organizations and domains. We bring diverse sets of talent and experience to tackle the optimal way to approach new products, services, and applied research.</p>
+            <p>The power of machine learning is based on the proper application of these mathematical techniques embedded into a market or business solution. Statistical methods are powerful tools and solution design is critical to maximizing their power.</p>
+            <p>The "food" for all machine learning solutions is the rich data on which it can act and react. We offer consulting services in the area of data understanding, feature engineering, component analysis, and general data wrangling.</p>
         </div>
-    </section>
+
+        <div class="service-card">
+            <h2>Software & data architecture</h2>
+            <p>We have 30+ years of computing experience focused on harnessing the power of technology. Our expertise spans designing robust data pipelines, scalable software systems, and architectural solutions that support your innovation goals.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>Algorithm development & optimization</h2>
+            <p>The rise of interest in machine learning applications provides rich opportunities for the development and productization of intellectual property. We offer research, design, and collaboration services for those using these advanced techniques in the creation of new products and concepts.</p>
+            <p>The final core component of our algorithm development focus is the service around exploring and researching possible optimizations to the customer's specifications. This allows the concepts in the mind of the user to be matched to the set of mathematical transformations that result in the learning and innovation delivery.</p>
+        </div>
+
+        <div class="service-card">
+            <h2>Prototype & proof of concept delivery</h2>
+            <p>Applying real world approaches to protecting key intellectual and innovative concepts. Consulting on when it is most appropriate to open these concepts to a broader community, both inbound and outbound.</p>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -294,14 +266,10 @@
     </footer>
 
     <script>
-        // Auto-update copyright year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Theme toggle functionality
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
-
-        // Check for saved theme preference or default to light mode
         const currentTheme = localStorage.getItem('theme') || 'light';
         html.setAttribute('data-theme', currentTheme);
 
