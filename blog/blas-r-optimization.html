@@ -218,9 +218,211 @@
         <div class="post-meta">Samantha Lawson · Jun 14, 2025</div>
 
         <div class="post-content">
-            <p>Leverage BLAS and vectorized R code to achieve massive performance gains in your numerical workflows.</p>
+	    <p>R is a popular language for statistical computing and data analysis, but it's often criticized for being slow, especially when processing large numerical datasets. The good news? Much of this perception comes down to how R code is written and what libraries it's linked to.</p>
 
-            <p><em>Note: This is a placeholder. Add your full blog post content here from your original Wix site.</em></p>
+            <p>At the heart of R's numerical power is <strong>BLAS (Basic Linear Algebra Subprograms)</strong>. When R code is written to <strong>leverage BLAS via vectorized operations</strong>, and linked to a high-performance BLAS implementation, the speedups can be dramatic.</p>
+
+            <p>This guide walks you through:</p>
+            <ul>
+                <li>What BLAS is and why it matters.</li>
+                <li>How to <strong>write R code that takes advantage of it</strong>.</li>
+                <li>How to <strong>verify, benchmark, and tune</strong> performance using optimized BLAS backends.</li>
+            </ul>
+
+            <hr>
+
+            <h2>What is BLAS, and Why Does R Use It? 🔢</h2>
+
+            <p><strong>BLAS</strong> is a low-level specification for common linear algebra operations such as:</p>
+            <ul>
+                <li>Vector addition and scaling</li>
+                <li>Matrix multiplication</li>
+                <li>Solving systems of equations</li>
+                <li>Computing dot products, norms, and decompositions</li>
+            </ul>
+
+            <p>R delegates many of its core numeric functions to BLAS internally—meaning if your code uses these functions, it can benefit from a faster BLAS implementation without modification.</p>
+
+            <hr>
+
+            <h2>🧠 R Code Performance Starts with Vectorization</h2>
+
+            <p>Before worrying about swapping BLAS libraries, the most critical optimization you can make is in <strong>how you write your R code</strong>. In particular:</p>
+
+            <h3>Prefer Vectorized Code</h3>
+
+            <p>Instead of using <code>for</code> loops to perform row-wise or element-wise operations, use R's built-in vectorized functions.</p>
+
+            <p><strong>Slow (loop-based):</strong></p>
+            <pre><code>n <- 1000
+x <- rnorm(n)
+y <- rnorm(n)
+
+z <- numeric(n)
+for (i in 1:n) {
+  z[i] <- x[i] + y[i]
+}</code></pre>
+
+            <p><strong>Fast (vectorized):</strong></p>
+            <pre><code>z <- x + y</code></pre>
+
+            <h3>Use BLAS-backed Functions</h3>
+
+            <p>Some key base R functions are backed by BLAS and can benefit directly from optimized libraries:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Matrix multiply</td>
+                        <td><code>A %*% B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cross product</td>
+                        <td><code>crossprod(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Transposed cross</td>
+                        <td><code>tcrossprod(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cholesky</td>
+                        <td><code>chol(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Solve linear sys</td>
+                        <td><code>solve(A, b)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Eigenvalues</td>
+                        <td><code>eigen(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Singular value</td>
+                        <td><code>svd(A)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>By sticking to these functions and avoiding reinventing linear algebra with loops, you write cleaner, <strong>faster</strong> code that scales better on large problems.</p>
+
+            <h2>Using Optimized BLAS Libraries with R 🧩</h2>
+
+            <p>R comes with a reference BLAS that emphasizes compatibility and correctness over speed. But you can swap it for a faster implementation.</p>
+
+            <h3>Popular BLAS Libraries</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>BLAS Library</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>OpenBLAS</strong></td>
+                        <td>Open source, fast, multi-threaded, widely available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intel MKL</strong></td>
+                        <td>Extremely fast, optimized for Intel CPUs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apple Accelerate</strong></td>
+                        <td>Default on macOS, good performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ATLAS</strong></td>
+                        <td>Automatically tuned, but less popular today</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>Tuning Thread Count for Multi-core BLAS ⚙️</h2>
+
+            <p>Most optimized BLAS libraries are <strong>multi-threaded</strong>, which can significantly boost performance, if properly configured.</p>
+
+            <h3>Set Number of Threads in R:</h3>
+
+            <pre><code>Sys.setenv(OMP_NUM_THREADS = 4)        # For OpenMP-based BLAS (OpenBLAS, MKL)
+Sys.setenv(OPENBLAS_NUM_THREADS = 4)   # OpenBLAS-specific</code></pre>
+
+            <blockquote>🔧 Benchmark different values. Too many threads can actually slow down performance due to contention or memory bandwidth limits.</blockquote>
+
+            <p>To force reproducibility (e.g. for research):</p>
+
+            <pre><code>Sys.setenv(OMP_NUM_THREADS = 1)</code></pre>
+
+            <hr>
+
+            <h2>Caveats: Stability and Reproducibility ⚠️</h2>
+
+            <ul>
+                <li>Optimized BLAS may yield <strong>slightly different numerical results</strong> due to floating-point arithmetic and parallel execution.</li>
+                <li>Not all packages are thread-safe, test your workflow.</li>
+                <li>For academic publications, consider locking the environment (e.g. via <code>renv</code>) and documenting threading behavior.</li>
+            </ul>
+
+            <hr>
+
+            <h2>✅ Summary: Best Practices for High-Performance R Code</h2>
+
+            <p>Here's your cheat sheet to fast R code:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Practice</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Write vectorized code</strong></td>
+                        <td>Clean, fast, memory-efficient</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use matrix operations (<code>%*%</code>, <code>solve</code>, <code>crossprod</code>)</strong></td>
+                        <td>Taps into BLAS automatically</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avoid loops where possible</strong></td>
+                        <td>Better cache locality, faster execution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use optimized BLAS backend</strong></td>
+                        <td>Up to 20x speedup with zero code change</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Control threading</strong></td>
+                        <td>Avoid oversubscription and improve reproducibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Benchmark often</strong></td>
+                        <td>Know when and where speed gains occur</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>🧵 Final Thoughts</h2>
+
+            <p>R is often underestimated in terms of performance. But the real secret is not rewriting everything in C++ or relying on external libraries, it's about <strong>writing R code that vectorizes well</strong>, and making sure your environment is set up to <strong>let BLAS do the heavy lifting</strong>.</p>
+
+            <p>If you're doing heavy numerical computing, in <strong>bioinformatics</strong>, <strong>statistics</strong>, <strong>machine learning</strong>, or <strong>simulation modeling</strong>, investing a few hours to optimize your R setup and scripting style can translate to <strong>days of computation saved</strong> over time.</p>
+
+            <hr>
+
+            <p><em>Questions or thoughts? Want to see a follow-up post on benchmarking or parallelism in R? Reach out at <a href="mailto:connect@puregradient.com">connect@puregradient.com</a>.</em></p>
         </div>
     </article>
 
