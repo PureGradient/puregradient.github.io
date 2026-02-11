@@ -14,6 +14,7 @@
             --accent: #0066ff;
             --bg: #ffffff;
             --border: #e5e5e5;
+            --code-bg: #f5f5f5;
         }
 
         [data-theme="dark"] {
@@ -22,6 +23,7 @@
             --accent: #4d9fff;
             --bg: #0a0a0a;
             --border: #2a2a2a;
+            --code-bg: #1a1a1a;
         }
 
         * {
@@ -155,6 +157,108 @@
             color: var(--secondary);
         }
 
+        .post-content h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .post-content h3 {
+            font-size: 1.35rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .post-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: var(--secondary);
+        }
+
+        .post-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .post-content a:hover {
+            opacity: 0.7;
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--secondary);
+        }
+
+        .post-content code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+        }
+
+        .post-content pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .post-content table th,
+        .post-content table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .post-content table th {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .post-content table td {
+            color: var(--secondary);
+        }
+
+        .post-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -189,6 +293,10 @@
                 font-size: 2rem;
             }
 
+            .post-content table {
+                font-size: 0.85rem;
+            }
+
             .footer-content {
                 flex-direction: column;
                 gap: 1rem;
@@ -218,7 +326,7 @@
         <div class="post-meta">Samantha Lawson · Jun 14, 2025</div>
 
         <div class="post-content">
-	    <p>R is a popular language for statistical computing and data analysis, but it's often criticized for being slow, especially when processing large numerical datasets. The good news? Much of this perception comes down to how R code is written and what libraries it's linked to.</p>
+            <p>R is a popular language for statistical computing and data analysis, but it's often criticized for being slow, especially when processing large numerical datasets. The good news? Much of this perception comes down to how R code is written and what libraries it's linked to.</p>
 
             <p>At the heart of R's numerical power is <strong>BLAS (Basic Linear Algebra Subprograms)</strong>. When R code is written to <strong>leverage BLAS via vectorized operations</strong>, and linked to a high-performance BLAS implementation, the speedups can be dramatic.</p>
 
