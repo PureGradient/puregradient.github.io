@@ -107,6 +107,16 @@
             color: var(--accent);
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
         .hero {
             margin-top: 80px;
             padding: 6rem 2rem 4rem;
@@ -205,6 +215,38 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 73px;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
         }
     </style>
 </head>
@@ -212,7 +254,8 @@
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">PureGradient</a>
-            <ul class="nav-links">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
                 <li><a href="/toolbox.html">Toolbox</a></li>
@@ -278,6 +321,22 @@
             html.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         });
+
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
     </script>
 </body>
 </html>
