@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toolbox | PureGradient</title>
+    <title>Projects | PureGradient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -118,34 +118,122 @@
         }
 
         .hero {
+            position: relative;
+            overflow: hidden;
             margin-top: 80px;
-            padding: 6rem 2rem 4rem;
+            padding: 6rem 2rem 3rem;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            text-align: center;
+        }
+
+        .hero-contour {
+            position: absolute;
+            top: -15%;
+            right: -5%;
+            width: 55%;
+            height: 130%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        [data-theme="dark"] .hero-contour path,
+        [data-theme="dark"] .hero-contour circle {
+            stroke: #4d9fff;
+        }
+
+        .hero-tagline {
+            font-size: 1.15rem;
+            color: var(--secondary);
+            max-width: 650px;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
+            position: relative;
+            z-index: 2;
             font-size: 3rem;
             font-weight: 700;
             line-height: 1.1;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
         }
 
-        .toolbox-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .intro {
             font-size: 1.15rem;
             color: var(--secondary);
-            line-height: 1.8;
+            max-width: 700px;
+        }
+
+        /* Project Grid */
+        .projects-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            border: 1px solid var(--border);
+            padding: 2rem;
+            transition: border-color 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .project-status {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 0.25rem 0.6rem;
+            border-radius: 3px;
         }
 
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
-            margin-top: 8rem;
+            margin-top: 4rem;
         }
 
         .footer-content {
@@ -172,14 +260,13 @@
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            .hero-contour {
+                width: 90%;
+                opacity: 0.5;
             }
 
-            .footer-content {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+            h1 {
+                font-size: 2.5rem;
             }
 
             .mobile-menu-toggle {
@@ -213,6 +300,16 @@
             .nav-links li:last-child {
                 border-bottom: none;
             }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -224,7 +321,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
-                <li><a href="/toolbox.html">Toolbox</a></li>
+                <li><a href="/projects.html">Projects</a></li>
                 <li><a href="/team.html">Team</a></li>
                 <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             </ul>
@@ -232,9 +329,54 @@
     </nav>
 
     <section class="hero">
-        <h1>Toolbox</h1>
-        <div class="toolbox-content">
-            <p>This page is reserved for our homegrown project that lies at the intersection of research and business. Once complete we aim to provide idea people with a tool that integrates research technology seamlessly into the entrepreneurial space and help drive innovation forward.</p>
+        <svg class="hero-contour" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#0066ff" stroke-width="1.2">
+                <path d="M 480 40 Q 380 20 300 80 Q 220 140 240 220 Q 260 300 350 320 Q 440 340 460 260" opacity="0.15"/>
+                <path d="M 470 70 Q 390 55 320 105 Q 250 155 265 220 Q 280 285 355 300 Q 430 315 445 250" opacity="0.25"/>
+                <path d="M 460 100 Q 400 90 345 130 Q 285 170 295 220 Q 305 270 360 280 Q 415 290 425 240" opacity="0.35"/>
+                <path d="M 450 130 Q 405 122 365 152 Q 320 182 328 218 Q 335 254 370 262 Q 405 270 412 232" opacity="0.5"/>
+                <path d="M 435 155 Q 400 150 372 172 Q 348 194 354 218 Q 360 242 385 248 Q 408 254 414 226" opacity="0.65"/>
+                <circle cx="390" cy="200" r="4" fill="#0066ff" stroke="none" opacity="0.8"/>
+            </g>
+        </svg>
+        <h1>Projects</h1>
+        <p class="intro">A look at the tools and platforms we're building at the intersection of research and industry — bridging computational science with practical, real-world application.</p>
+    </section>
+
+    <section class="projects-section">
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-status">In Development</div>
+                <h2>Sim Med Suite</h2>
+                <p>A simulation and modelling toolkit built for medical and healthcare research, supporting scenario testing and predictive analysis across clinical workflows.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Healthcare</span>
+                    <span class="project-tag">Simulation</span>
+                    <span class="project-tag">Modelling</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-status">In Development</div>
+                <h2>Computarium</h2>
+                <p>A computational workspace designed to streamline research pipelines, enabling reproducible analysis and collaborative experimentation at scale.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Research Computing</span>
+                    <span class="project-tag">Reproducibility</span>
+                    <span class="project-tag">Collaboration</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-status">Live</div>
+                <h2>Ref-Platform</h2>
+                <p>A clinical reference and knowledge platform combining semantic search with curated content, helping practitioners find trusted guidance quickly.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Clinical Reference</span>
+                    <span class="project-tag">Semantic Search</span>
+                    <span class="project-tag">Knowledge Platform</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -264,7 +406,6 @@
             localStorage.setItem('theme', theme);
         });
 
-        // Mobile menu toggle
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const navLinks = document.getElementById('navLinks');
 
@@ -272,7 +413,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');

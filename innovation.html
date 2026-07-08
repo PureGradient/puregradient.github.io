@@ -107,17 +107,9 @@
             color: var(--accent);
         }
 
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
         .hero {
+            position: relative;
+            overflow: hidden;
             margin-top: 80px;
             padding: 6rem 2rem 4rem;
             max-width: 1200px;
@@ -125,7 +117,33 @@
             margin-right: auto;
         }
 
+        .hero-contour {
+            position: absolute;
+            top: -15%;
+            right: -5%;
+            width: 55%;
+            height: 130%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        [data-theme="dark"] .hero-contour path,
+        [data-theme="dark"] .hero-contour circle {
+            stroke: #4d9fff;
+        }
+
+        .hero-tagline {
+            font-size: 1.15rem;
+            color: var(--secondary);
+            max-width: 650px;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
         h1 {
+            position: relative;
+            z-index: 2;
             font-size: 3rem;
             font-weight: 700;
             line-height: 1.1;
@@ -202,6 +220,11 @@
         }
 
         @media (max-width: 768px) {
+            .hero-contour {
+                width: 90%;
+                opacity: 0.5;
+            }
+
             h1 {
                 font-size: 2.5rem;
             }
@@ -215,38 +238,6 @@
                 gap: 1rem;
                 text-align: center;
             }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 73px;
-                left: 0;
-                right: 0;
-                background: var(--bg);
-                border-bottom: 1px solid var(--border);
-                flex-direction: column;
-                gap: 0;
-                padding: 1rem 0;
-                display: none;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-                padding: 0.75rem 0;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .nav-links li:last-child {
-                border-bottom: none;
-            }
         }
     </style>
 </head>
@@ -254,11 +245,10 @@
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">PureGradient</a>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
-            <ul class="nav-links" id="navLinks">
+            <ul class="nav-links">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
-                <li><a href="/toolbox.html">Toolbox</a></li>
+                <li><a href="/projects.html">Projects</a></li>
                 <li><a href="/team.html">Team</a></li>
                 <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             </ul>
@@ -266,6 +256,16 @@
     </nav>
 
     <section class="hero">
+        <svg class="hero-contour" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#0066ff" stroke-width="1.2">
+                <path d="M 480 40 Q 380 20 300 80 Q 220 140 240 220 Q 260 300 350 320 Q 440 340 460 260" opacity="0.15"/>
+                <path d="M 470 70 Q 390 55 320 105 Q 250 155 265 220 Q 280 285 355 300 Q 430 315 445 250" opacity="0.25"/>
+                <path d="M 460 100 Q 400 90 345 130 Q 285 170 295 220 Q 305 270 360 280 Q 415 290 425 240" opacity="0.35"/>
+                <path d="M 450 130 Q 405 122 365 152 Q 320 182 328 218 Q 335 254 370 262 Q 405 270 412 232" opacity="0.5"/>
+                <path d="M 435 155 Q 400 150 372 172 Q 348 194 354 218 Q 360 242 385 248 Q 408 254 414 226" opacity="0.65"/>
+                <circle cx="390" cy="200" r="4" fill="#0066ff" stroke="none" opacity="0.8"/>
+            </g>
+        </svg>
         <h1>Innovation consulting</h1>
         <p class="intro">A simple scientific consulting firm dedicated to innovation, design, and technology challenges.</p>
         <p class="intro">Focused on creating value and helping clients take concepts to their desired endpoint — concept, design, proof to market.</p>
@@ -321,22 +321,6 @@
             html.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
         });
-
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-        const navLinks = document.getElementById('navLinks');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-        
     </script>
 </body>
 </html>
