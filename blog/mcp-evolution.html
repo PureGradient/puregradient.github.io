@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Glorious Evolution of MCP | PureGradient</title>
+    <title>Speed Up R Code with BLAS | PureGradient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -14,6 +14,7 @@
             --accent: #0066ff;
             --bg: #ffffff;
             --border: #e5e5e5;
+            --code-bg: #f5f5f5;
         }
 
         [data-theme="dark"] {
@@ -22,6 +23,7 @@
             --accent: #4d9fff;
             --bg: #0a0a0a;
             --border: #2a2a2a;
+            --code-bg: #1a1a1a;
         }
 
         * {
@@ -107,6 +109,16 @@
             color: var(--accent);
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
         article {
             margin-top: 80px;
             padding: 4rem 2rem;
@@ -155,6 +167,108 @@
             color: var(--secondary);
         }
 
+        .post-content h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .post-content h3 {
+            font-size: 1.35rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .post-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: var(--secondary);
+        }
+
+        .post-content ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-content a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .post-content a:hover {
+            opacity: 0.7;
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--secondary);
+        }
+
+        .post-content code {
+            background: var(--code-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+        }
+
+        .post-content pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .post-content table th,
+        .post-content table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .post-content table th {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .post-content table td {
+            color: var(--secondary);
+        }
+
+        .post-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 3rem 0;
+        }
+
         footer {
             border-top: 1px solid var(--border);
             padding: 3rem 2rem;
@@ -185,8 +299,44 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 73px;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
             h1 {
                 font-size: 2rem;
+            }
+
+            .post-content table {
+                font-size: 0.85rem;
             }
 
             .footer-content {
@@ -201,10 +351,11 @@
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">PureGradient</a>
-            <ul class="nav-links">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
-                <li><a href="/toolbox.html">Toolbox</a></li>
+                <li><a href="/projects.html">Projects</a></li>
                 <li><a href="/team.html">Team</a></li>
                 <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             </ul>
@@ -214,91 +365,215 @@
     <article>
         <a href="/" class="back-link">← Back to blog</a>
         
-        <h1>The Glorious Evolution of MCP: From Evil AI to Helpful Metadata</h1>
-        <div class="post-meta">Karen Lawson · Aug 14, 2025</div>
+        <h1>Speed Up R Code with BLAS 🔧</h1>
+        <div class="post-meta">Samantha Lawson · Jun 14, 2025</div>
 
         <div class="post-content">
-            <img src="/images/MCP.jpg" alt="MCP Evolution" style="width: 100%; margin-bottom: 2rem; border-radius: 4px;">
+            <p>R is a popular language for statistical computing and data analysis, but it's often criticized for being slow, especially when processing large numerical datasets. The good news? Much of this perception comes down to how R code is written and what libraries it's linked to.</p>
 
-            <p style="font-size: 0.85rem; color: var(--secondary); font-style: italic; margin-top: -1rem; margin-bottom: 2rem;">
-            Image: Master Control Program from TRON (1982). Source: <a href="https://disney.fandom.com/wiki/Master_Control_Program" target="_blank">Disney Fandom</a>
-            </p>
+            <p>At the heart of R's numerical power is <strong>BLAS (Basic Linear Algebra Subprograms)</strong>. When R code is written to <strong>leverage BLAS via vectorized operations</strong>, and linked to a high-performance BLAS implementation, the speedups can be dramatic.</p>
 
-            <p>Ah, MCP. Three humble letters. So simple. So short. Yet packed with more drama, evolution, and character development than a season of your favorite show.</p>
-
-            <p>Once the acronym for a menacing 1980s AI hell-bent on digital domination, MCP has been rebranded, repurposed, and rebooted more times than Batman. Today, it's far more likely to help your machine learning model understand context than to vaporize a plucky software engineer with a light disc.</p>
-
-            <p>Let's take a journey through time, from Master Control Program to Model Context Protocol, and uncover how MCP went from movie villain to metadata manager.</p>
-
-            <h2>1. MCP: Master Control Program (1982ish)</h2>
-            <blockquote>"End of line."</blockquote>
-
-            <p>Back in the neon-drenched, synth-heavy world of 1980's version of TRON, the MCP was <strong><em>THE</em></strong> villain. Think HAL 9000 but with more bureaucracy. A rogue AI that absorbed smaller programs like some kind of digital Galactus, the MCP was the ultimate "corporate overlord in a server rack."</p>
-
-            <p>This version of MCP was:</p>
+            <p>This guide walks you through:</p>
             <ul>
-                <li><strong>Power-hungry</strong></li>
-                <li><strong>Monolithic, but strangely has lips, a nose and eyes??</strong></li>
-                <li><strong>Addicted to global domination</strong></li>
-                <li><strong>Running on what we can only assume was a 16-bit UNIX system with bad attitude</strong></li>
+                <li>What BLAS is and why it matters.</li>
+                <li>How to <strong>write R code that takes advantage of it</strong>.</li>
+                <li>How to <strong>verify, benchmark, and tune</strong> performance using optimized BLAS backends.</li>
             </ul>
 
-            <p>Not exactly something you'd want helping you out with your ML pipeline.</p>
+            <hr>
 
-            <h2>2. MCP: Mission Control Protocol (early 2000s)</h2>
+            <h2>What is BLAS, and Why Does R Use It? 🔢</h2>
 
-            <p>As the dot-com dust settled and people started wiring their toasters to the internet, "MCP" briefly flirted with a second life as "Mission Control Protocol."</p>
-
-            <p>This iteration was meant for coordinating distributed systems—basically, if your IoT fridge wanted to schedule a smoothie run with your smartwatch and your car, it needed a bossy protocol. Hence, Mission Control.</p>
-
-            <p>Unfortunately, this version of MCP suffered from:</p>
+            <p><strong>BLAS</strong> is a low-level specification for common linear algebra operations such as:</p>
             <ul>
-                <li><strong>Too many acronyms inside the acronym</strong></li>
-                <li><strong>Chronic XML dependency</strong></li>
-                <li><strong>A tendency to fail gracefully—by crashing everything</strong></li>
+                <li>Vector addition and scaling</li>
+                <li>Matrix multiplication</li>
+                <li>Solving systems of equations</li>
+                <li>Computing dot products, norms, and decompositions</li>
             </ul>
 
-            <h2>3. MCP: Multi-Core Processing (mid-2010s)</h2>
+            <p>R delegates many of its core numeric functions to BLAS internally—meaning if your code uses these functions, it can benefit from a faster BLAS implementation without modification.</p>
 
-            <p>Now this one kinda made sense. As CPUs started looking more like pizza slices (quad-core, octa-core, "how-many-cores-is-too-many-cores?"), people started using MCP to refer to Multi-Core Processing.</p>
+            <hr>
 
-            <p>For a chuckle, see the 2010 MIT Review article on the "fundamental problem"… <a href="https://www.technologyreview.com/2010/04/20/204447/multicore-processors-create-software-headaches/" target="_blank">https://www.technologyreview.com/2010/04/20/204447/multicore-processors-create-software-headaches/</a>. Software hating on hardware, some things never change</p>
+            <h2>🧠 R Code Performance Starts with Vectorization</h2>
 
-            <p>This MCP was:</p>
+            <p>Before worrying about swapping BLAS libraries, the most critical optimization you can make is in <strong>how you write your R code</strong>. In particular:</p>
+
+            <h3>Prefer Vectorized Code</h3>
+
+            <p>Instead of using <code>for</code> loops to perform row-wise or element-wise operations, use R's built-in vectorized functions.</p>
+
+            <p><strong>Slow (loop-based):</strong></p>
+            <pre><code>n <- 1000
+x <- rnorm(n)
+y <- rnorm(n)
+
+z <- numeric(n)
+for (i in 1:n) {
+  z[i] <- x[i] + y[i]
+}</code></pre>
+
+            <p><strong>Fast (vectorized):</strong></p>
+            <pre><code>z <- x + y</code></pre>
+
+            <h3>Use BLAS-backed Functions</h3>
+
+            <p>Some key base R functions are backed by BLAS and can benefit directly from optimized libraries:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Operation</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Matrix multiply</td>
+                        <td><code>A %*% B</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cross product</td>
+                        <td><code>crossprod(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Transposed cross</td>
+                        <td><code>tcrossprod(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cholesky</td>
+                        <td><code>chol(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Solve linear sys</td>
+                        <td><code>solve(A, b)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Eigenvalues</td>
+                        <td><code>eigen(A)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Singular value</td>
+                        <td><code>svd(A)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>By sticking to these functions and avoiding reinventing linear algebra with loops, you write cleaner, <strong>faster</strong> code that scales better on large problems.</p>
+
+            <h2>Using Optimized BLAS Libraries with R 🧩</h2>
+
+            <p>R comes with a reference BLAS that emphasizes compatibility and correctness over speed. But you can swap it for a faster implementation.</p>
+
+            <h3>Popular BLAS Libraries</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>BLAS Library</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>OpenBLAS</strong></td>
+                        <td>Open source, fast, multi-threaded, widely available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intel MKL</strong></td>
+                        <td>Extremely fast, optimized for Intel CPUs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apple Accelerate</strong></td>
+                        <td>Default on macOS, good performance</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ATLAS</strong></td>
+                        <td>Automatically tuned, but less popular today</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr>
+
+            <h2>Tuning Thread Count for Multi-core BLAS ⚙️</h2>
+
+            <p>Most optimized BLAS libraries are <strong>multi-threaded</strong>, which can significantly boost performance, if properly configured.</p>
+
+            <h3>Set Number of Threads in R:</h3>
+
+            <pre><code>Sys.setenv(OMP_NUM_THREADS = 4)        # For OpenMP-based BLAS (OpenBLAS, MKL)
+Sys.setenv(OPENBLAS_NUM_THREADS = 4)   # OpenBLAS-specific</code></pre>
+
+            <blockquote>🔧 Benchmark different values. Too many threads can actually slow down performance due to contention or memory bandwidth limits.</blockquote>
+
+            <p>To force reproducibility (e.g. for research):</p>
+
+            <pre><code>Sys.setenv(OMP_NUM_THREADS = 1)</code></pre>
+
+            <hr>
+
+            <h2>Caveats: Stability and Reproducibility ⚠️</h2>
+
             <ul>
-                <li><strong>Efficient</strong></li>
-                <li><strong>Scalable</strong></li>
-                <li><strong>Suspiciously hot (literally, check your thermals)</strong></li>
+                <li>Optimized BLAS may yield <strong>slightly different numerical results</strong> due to floating-point arithmetic and parallel execution.</li>
+                <li>Not all packages are thread-safe, test your workflow.</li>
+                <li>For academic publications, consider locking the environment (e.g. via <code>renv</code>) and documenting threading behavior.</li>
             </ul>
 
-            <p>But alas, it lacked narrative flair. Hard to build a mythos around a scheduling algorithm, you know?</p>
+            <hr>
 
-            <h2>4. MCP: Model Context Protocol (2020s – Present)</h2>
+            <h2>✅ Summary: Best Practices for High-Performance R Code</h2>
 
-            <p>And now we arrive at the golden age of AI. A time when everything is a model, everything has context, and everything needs a protocol to coordinate which version of "banana" you're referring to.</p>
+            <p>Here's your cheat sheet to fast R code:</p>
 
-            <p><strong>Model Context Protocol</strong> is the <em>millennial grandchild</em> of the Master Control Program. It doesn't want to conquer the world—it just wants to help your language model understand whether "Apple" is a fruit, a stock, or that thing you still plug into the wall because Bluetooth hates you.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Practice</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Write vectorized code</strong></td>
+                        <td>Clean, fast, memory-efficient</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use matrix operations (<code>%*%</code>, <code>solve</code>, <code>crossprod</code>)</strong></td>
+                        <td>Taps into BLAS automatically</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avoid loops where possible</strong></td>
+                        <td>Better cache locality, faster execution</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use optimized BLAS backend</strong></td>
+                        <td>Up to 20x speedup with zero code change</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Control threading</strong></td>
+                        <td>Avoid oversubscription and improve reproducibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Benchmark often</strong></td>
+                        <td>Know when and where speed gains occur</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <p>This modern MCP is:</p>
-            <ul>
-                <li><strong>Helpful, not homicidal</strong></li>
-                <li><strong>Lightweight and flexible (like your favorite JSON file)</strong></li>
-                <li><strong>The unsung hero behind smarter, safer AI (ah…maybe)</strong></li>
-            </ul>
+            <hr>
 
-            <p>While the original MCP wanted to control the grid, today's MCP wants to manage <strong>context</strong>. Which, frankly, is <em>way</em> more dangerous if you've ever seen a model hallucinate its way into legal advice.</p>
+            <h2>🧵 Final Thoughts</h2>
 
-            <h2>Conclusion: It's "The Circle of Bytes" (ala' "Circle of Life")</h2>
+            <p>R is often underestimated in terms of performance. But the real secret is not rewriting everything in C++ or relying on external libraries, it's about <strong>writing R code that vectorizes well</strong>, and making sure your environment is set up to <strong>let BLAS do the heavy lifting</strong>.</p>
 
-            <p>The MCP journey is a perfect metaphor for how tech evolves. From ominous overlords to quiet process helpers, our tech stack grows up—just like we do. They shed their legacy baggage, stop trying to take over the world, and focus on something more achievable: making sense of increasingly chaotic human behavior.</p>
+            <p>If you're doing heavy numerical computing, in <strong>bioinformatics</strong>, <strong>statistics</strong>, <strong>machine learning</strong>, or <strong>simulation modeling</strong>, investing a few hours to optimize your R setup and scripting style can translate to <strong>days of computation saved</strong> over time.</p>
 
-            <p>So the next time someone says "MCP," pause and ask:<br>
-            <strong>"Are we talking TRON, CPUs, or token metadata?"</strong></p>
+            <hr>
 
-            <p>And when they say "Model Context Protocol," smile knowingly and reply:<br>
-            <strong>"Good. Much safer. Probably."</strong></p>
-
-            <p><em>Written with some help and support from OpenAI. (2025). ChatGPT (June 4 version) [Large language model]. https://chat.openai.com/chat</em></p>
+            <p><em>Questions or thoughts? Want to see a follow-up post on benchmarking or parallelism in R? Reach out at <a href="mailto:connect@puregradient.com">connect@puregradient.com</a>.</em></p>
         </div>
     </article>
 
@@ -326,6 +601,19 @@
             const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
+        });
+
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     </script>
 </body>

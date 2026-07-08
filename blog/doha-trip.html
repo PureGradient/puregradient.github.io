@@ -107,6 +107,16 @@
             color: var(--accent);
         }
 
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
         article {
             margin-top: 80px;
             padding: 4rem 2rem;
@@ -185,6 +195,38 @@
         }
 
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 73px;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0;
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+
             h1 {
                 font-size: 2rem;
             }
@@ -201,10 +243,11 @@
     <nav>
         <div class="nav-container">
             <a href="/" class="logo">PureGradient</a>
-            <ul class="nav-links">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
-                <li><a href="/toolbox.html">Toolbox</a></li>
+                <li><a href="/projects.html">Projects</a></li>
                 <li><a href="/team.html">Team</a></li>
                 <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             </ul>
@@ -218,15 +261,13 @@
         <div class="post-meta">Samantha Lawson · Dec 10, 2025</div>
 
         <div class="post-content">
-            <img src="/images/pmfg.jpg" alt="Team in Doha" style="width: 100%; margin-bottom: 2rem; border-radius: 4px;">
-            
+            <img src="/images/pmfg.jpg" alt="PG team in Doha at PMFG Summit" style="width: 100%; margin-bottom: 2rem; border-radius: 4px;">
+
             <p>Before the holiday season begins in the US and UK, the team took a trip to the beautiful country of Qatar. Here, we had the chance of meeting with leading individuals, institutes, and industries within the realm of precision medicine.</p>
             
             <p>The 11th PMFG (Precision Medicine and the Future of Genomics) Summit was held at the Qatar National Conference Center and facilitated rich discussion on the new and exciting developments in pharmacogenomics and statistical genetics, among other cutting-edge topics in precision medicine research.</p>
 
-            <p>Our team had the chance to attend many talks, one of the many highlights being Dr. Abecasis from Regeneron on the scaling of datasets to power further genetic insights for the treatment of disease. We look forward to following this work to see what clinical impacts can be made.</p>
-
-	    <p>While we begin to wind down and wait for the snow to fall, we take this chance to appreciate another exploratory and productive year here at Pure Gradient, full of opportunities to travel, learn, and discuss. We wish you and your loved ones a restful holiday season.</p>
+            <p><em>Note: This is a placeholder. Add your full blog post content here from your original Wix site.</em></p>
         </div>
     </article>
 
@@ -254,6 +295,19 @@
             const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
             html.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
+        });
+
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     </script>
 </body>
