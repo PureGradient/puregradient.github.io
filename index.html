@@ -24,6 +24,11 @@
             --border: #2a2a2a;
         }
 
+        [data-theme="dark"] .hero-contour path,
+        [data-theme="dark"] .hero-contour circle {
+            stroke: #4d9fff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -91,7 +96,6 @@
             color: var(--accent);
         }
 
-        /* Theme Toggle */
         .theme-toggle {
             background: none;
             border: 1px solid var(--border);
@@ -121,11 +125,35 @@
 
         /* Hero Section */
         .hero {
+            position: relative;
             margin-top: 80px;
             padding: 6rem 2rem 4rem;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
+            overflow: hidden;
+        }
+
+        .hero-contour {
+            position: absolute;
+            top: -15%;
+            right: -5%;
+            width: 55%;
+            height: 130%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            display: block;
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
@@ -134,6 +162,8 @@
             line-height: 1.1;
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
+            position: relative;
+            z-index: 2;
         }
 
         .tagline {
@@ -141,6 +171,26 @@
             color: var(--secondary);
             max-width: 600px;
             margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .about-content {
+            max-width: 800px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
         /* Blog Section */
@@ -233,18 +283,9 @@
                 font-size: 2.5rem;
             }
 
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
+            .hero-contour {
+                width: 90%;
+                opacity: 0.5;
             }
 
             .mobile-menu-toggle {
@@ -278,6 +319,16 @@
             .nav-links li:last-child {
                 border-bottom: none;
             }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -289,7 +340,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="/">Blog</a></li>
                 <li><a href="/innovation.html">Innovation</a></li>
-                <li><a href="/toolbox.html">Toolbox</a></li>
+                <li><a href="/projects.html">Projects</a></li>
                 <li><a href="/team.html">Team</a></li>
                 <li><button class="theme-toggle" id="themeToggle">◐</button></li>
             </ul>
@@ -297,22 +348,37 @@
     </nav>
 
     <section class="hero">
+        <svg class="hero-contour" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#0066ff" stroke-width="1.2">
+                <path d="M 480 40 Q 380 20 300 80 Q 220 140 240 220 Q 260 300 350 320 Q 440 340 460 260" opacity="0.15"/>
+                <path d="M 470 70 Q 390 55 320 105 Q 250 155 265 220 Q 280 285 355 300 Q 430 315 445 250" opacity="0.25"/>
+                <path d="M 460 100 Q 400 90 345 130 Q 285 170 295 220 Q 305 270 360 280 Q 415 290 425 240" opacity="0.35"/>
+                <path d="M 450 130 Q 405 122 365 152 Q 320 182 328 218 Q 335 254 370 262 Q 405 270 412 232" opacity="0.5"/>
+                <path d="M 435 155 Q 400 150 372 172 Q 348 194 354 218 Q 360 242 385 248 Q 408 254 414 226" opacity="0.65"/>
+                <circle cx="390" cy="200" r="4" fill="#0066ff" stroke="none" opacity="0.8"/>
+            </g>
+        </svg>
+        <span class="eyebrow">Portland, OR · London, UK</span>
         <h1>Research Technology<br>Innovation</h1>
-        <p class="tagline">Advancing precision medicine and computational biology through cutting-edge research and open-source tools.</p>
+    </section>
+
+    <section class="about-section">
+        <div class="about-content">
+            <p>PureGradient is a research technology consultancy at the intersection of computational science, software engineering, and product innovation. We partner with healthcare organizations, research institutions, and industry leaders to transform complex ideas into practical, scalable solutions—from machine learning architectures to data-driven platforms.</p>
+            <p>Combining decades of experience in bioinformatics, enterprise technology, and AI/ML development, our team bridges the gap between cutting-edge research and real-world application. We believe the best innovations come from deep technical expertise paired with genuine collaboration—whether we're architecting a new data platform or bringing a health-tech product to market.</p>
+        </div>
     </section>
 
     <section id="blog" class="blog-section">
         <div class="section-title">Latest from the founders</div>
         <div class="blog-grid">
             <a href="/blog/doha-trip.html" class="blog-card">
-                <img src="/images/pmfg.jpg" alt="Doha trip" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 4px;">
                 <h3>PG team heads to Doha</h3>
                 <p>The team visited Qatar for the 11th PMFG Summit, discussing precision medicine and genomics with leading experts.</p>
                 <div class="blog-meta">Samantha Lawson · Dec 10, 2025</div>
             </a>
 
             <a href="/blog/mcp-evolution.html" class="blog-card">
-                <img src="/images/MCP.jpg" alt="MCP Evolution" style="width: 100%; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 4px;">
                 <h3>The Glorious Evolution of MCP: From Evil AI to Helpful Metadata</h3>
                 <p>Three humble letters packed with more drama and evolution than you might expect.</p>
                 <div class="blog-meta">Karen Lawson · Aug 14, 2025</div>
@@ -370,7 +436,6 @@
                 navLinks.classList.remove('active');
             });
         });
-
     </script>
 </body>
 </html>
