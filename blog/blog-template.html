@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovation | PureGradient</title>
+    <title>Blog Post Title | PureGradient</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -121,87 +121,85 @@
             padding: 0.5rem;
         }
 
-        .hero {
-            position: relative;
-            overflow: hidden;
+        article {
             margin-top: 80px;
-            padding: 6rem 2rem 4rem;
-            max-width: 1200px;
+            padding: 4rem 2rem;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .hero-contour {
-            position: absolute;
-            top: -15%;
-            right: -5%;
-            width: 55%;
-            height: 130%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        [data-theme="dark"] .hero-contour path,
-        [data-theme="dark"] .hero-contour circle {
-            stroke: #4d9fff;
-        }
-
-        .hero-tagline {
-            font-size: 1.15rem;
+        .back-link {
             color: var(--secondary);
-            max-width: 650px;
-            margin-top: 1rem;
-            position: relative;
-            z-index: 2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
         }
 
         h1 {
-            position: relative;
-            z-index: 2;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
             letter-spacing: -0.03em;
         }
 
-        .intro {
-            font-size: 1.15rem;
+        .post-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
             color: var(--secondary);
-            max-width: 700px;
-            margin-bottom: 1rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin: 4rem 0;
-            max-width: 1200px;
-            padding: 0 2rem;
-            margin-left: auto;
-            margin-right: auto;
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
-        .service-card {
-            border: 1px solid var(--border);
-            padding: 2rem;
-            transition: border-color 0.2s;
-        }
-
-        .service-card:hover {
-            border-color: var(--accent);
-        }
-
-        .service-card h2 {
-            font-size: 1.5rem;
+        .post-content p {
             margin-bottom: 1.5rem;
+            color: var(--secondary);
         }
 
-        .service-card p {
-            color: var(--secondary);
-            line-height: 1.7;
+        .post-content h2 {
+            font-size: 1.75rem;
+            margin-top: 2.5rem;
             margin-bottom: 1rem;
+        }
+
+        .post-content h3 {
+            font-size: 1.35rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-content code {
+            background: var(--border);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9em;
+        }
+
+        .post-content pre {
+            background: var(--border);
+            padding: 1.5rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
         }
 
         footer {
@@ -266,17 +264,8 @@
                 border-bottom: none;
             }
 
-            .hero-contour {
-                width: 90%;
-                opacity: 0.5;
-            }
-
             h1 {
-                font-size: 2.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
+                font-size: 2rem;
             }
 
             .footer-content {
@@ -310,46 +299,27 @@
         </div>
     </nav>
 
-    <section class="hero">
-        <svg class="hero-contour" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="#0066ff" stroke-width="1.2">
-                <path d="M 480 40 Q 380 20 300 80 Q 220 140 240 220 Q 260 300 350 320 Q 440 340 460 260" opacity="0.15"/>
-                <path d="M 470 70 Q 390 55 320 105 Q 250 155 265 220 Q 280 285 355 300 Q 430 315 445 250" opacity="0.25"/>
-                <path d="M 460 100 Q 400 90 345 130 Q 285 170 295 220 Q 305 270 360 280 Q 415 290 425 240" opacity="0.35"/>
-                <path d="M 450 130 Q 405 122 365 152 Q 320 182 328 218 Q 335 254 370 262 Q 405 270 412 232" opacity="0.5"/>
-                <path d="M 435 155 Q 400 150 372 172 Q 348 194 354 218 Q 360 242 385 248 Q 408 254 414 226" opacity="0.65"/>
-                <circle cx="390" cy="200" r="4" fill="#0066ff" stroke="none" opacity="0.8"/>
-            </g>
-        </svg>
-        <h1>Innovation consulting</h1>
-        <p class="intro">A simple scientific consulting firm dedicated to innovation, design, and technology challenges.</p>
-        <p class="intro">Focused on creating value and helping clients take concepts to their desired endpoint — concept, design, proof to market.</p>
-    </section>
+    <article>
+        <a href="/" class="back-link">← Back to blog</a>
+        
+        <h1>Your Blog Post Title Here</h1>
+        <div class="post-meta">Author Name · Date</div>
 
-    <div class="services-grid">
-        <div class="service-card">
-            <h2>Solution design & visualization</h2>
-            <p>Focus on design and architecture first. Take the problem apart, challenge common thinking and then iterate on solutions that deliver the results across disciplines, organizations and domains. We bring diverse sets of talent and experience to tackle the optimal way to approach new products, services, and applied research.</p>
-            <p>The power of machine learning is based on the proper application of these mathematical techniques embedded into a market or business solution. Statistical methods are powerful tools and solution design is critical to maximizing their power.</p>
-            <p>The "food" for all machine learning solutions is the rich data on which it can act and react. We offer consulting services in the area of data understanding, feature engineering, component analysis, and general data wrangling.</p>
-        </div>
+        <div class="post-content">
+            <p>Your blog post content goes here. This is a template you can copy and modify for each new blog post.</p>
 
-        <div class="service-card">
-            <h2>Software & data architecture</h2>
-            <p>We have 30+ years of computing experience focused on harnessing the power of technology. Our expertise spans designing robust data pipelines, scalable software systems, and architectural solutions that support your innovation goals.</p>
-        </div>
+            <h2>Section Heading</h2>
+            <p>More content here...</p>
 
-        <div class="service-card">
-            <h2>Algorithm development & optimization</h2>
-            <p>The rise of interest in machine learning applications provides rich opportunities for the development and productization of intellectual property. We offer research, design, and collaboration services for those using these advanced techniques in the creation of new products and concepts.</p>
-            <p>The final core component of our algorithm development focus is the service around exploring and researching possible optimizations to the customer's specifications. This allows the concepts in the mind of the user to be matched to the set of mathematical transformations that result in the learning and innovation delivery.</p>
-        </div>
+            <h3>Subsection</h3>
+            <p>Additional details...</p>
 
-        <div class="service-card">
-            <h2>Prototype & proof of concept delivery</h2>
-            <p>Applying real world approaches to protecting key intellectual and innovative concepts. Consulting on when it is most appropriate to open these concepts to a broader community, both inbound and outbound.</p>
+            <pre><code>// Code examples if needed
+function example() {
+    return "Hello World";
+}</code></pre>
         </div>
-    </div>
+    </article>
 
     <footer>
         <div class="footer-content">
