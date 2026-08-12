@@ -230,7 +230,33 @@
             color: var(--accent);
         }
 
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+
         @media (max-width: 768px) {
+            .cookie-banner {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .cookie-buttons {
+                justify-content: center;
+            }
+
             .mobile-menu-toggle {
                 display: block;
             }
@@ -273,15 +299,70 @@
                 text-align: center;
             }
         }
+
+        /* Cookie consent banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 1.25rem 2rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            z-index: 2000;
+            flex-wrap: wrap;
+        }
+
+        .cookie-banner p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin: 0;
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .cookie-banner a {
+            color: var(--accent);
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .cookie-btn {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: none;
+            color: var(--secondary);
+            transition: all 0.2s;
+        }
+
+        .cookie-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .cookie-accept {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .cookie-accept:hover {
+            opacity: 0.85;
+            color: #fff;
+        }
     </style>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELJKTTNSZC"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-ELJKTTNSZC");
-    </script>
 </head>
 <body>
     <nav>
@@ -315,6 +396,9 @@
                 <a href="mailto:connect@puregradient.com">connect@puregradient.com</a><br>
                 Portland, Oregon · London, United Kingdom
             </div>
+            <div class="footer-links">
+                <a href="/privacy.html">Privacy Policy</a>
+            </div>
             <div class="footer-info">
                 © <span id="currentYear"></span> PureGradient
             </div>
@@ -347,6 +431,49 @@
                 navLinks.classList.remove('active');
             });
         });
+    
+        // Cookie consent + gated Google Analytics loading
+        function loadGA() {
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-ELJKTTNSZC';
+            document.head.appendChild(script);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ window.dataLayer.push(arguments); }
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-ELJKTTNSZC');
+        }
+
+        const cookieBanner = document.getElementById('cookieBanner');
+        const cookieAccept = document.getElementById('cookieAccept');
+        const cookieDecline = document.getElementById('cookieDecline');
+        const consent = localStorage.getItem('cookie_consent');
+
+        if (consent === 'accepted') {
+            loadGA();
+        } else if (consent === null) {
+            cookieBanner.style.display = 'flex';
+        }
+
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('cookie_consent', 'accepted');
+            cookieBanner.style.display = 'none';
+            loadGA();
+        });
+
+        cookieDecline.addEventListener('click', () => {
+            localStorage.setItem('cookie_consent', 'declined');
+            cookieBanner.style.display = 'none';
+        });
     </script>
+
+    <div id="cookieBanner" class="cookie-banner">
+        <p>We use cookies for basic site analytics. <a href="/privacy.html">Learn more</a></p>
+        <div class="cookie-buttons">
+            <button id="cookieDecline" class="cookie-btn">Decline</button>
+            <button id="cookieAccept" class="cookie-btn cookie-accept">Accept</button>
+        </div>
+    </div>
 </body>
 </html>
